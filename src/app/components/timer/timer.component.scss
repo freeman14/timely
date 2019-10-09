@@ -1,0 +1,29 @@
+.timer__options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+
+  .timer__start {
+    margin-top: 20px;
+  }
+}
+
+.timer__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+
+  .timer {
+    font-size: 50px;
+    color: #fff;
+    font-weight: 600;
+  }
+}
+
+.timer__action-button {
+  color: #fff;
+}

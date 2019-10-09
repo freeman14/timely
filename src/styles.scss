@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~normalize.css/normalize.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import './assets/fonts/material-icons/material-icons.css';
+
+
+html {
+    height: 100%;
+}
+
+body { 
+  font-family: Roboto, Arial, sans-serif;
+  height: 100%;
+  background-image: linear-gradient(241deg,#373b45,#181a1d);
+}

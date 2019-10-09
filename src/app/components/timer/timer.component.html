@@ -1,0 +1,35 @@
+<ng-container *ngIf="!timerService.inProgress; else timeInProgressTemplate">
+  <div class="timer__options">
+    <mat-button-toggle-group #buttonGroup="matButtonToggleGroup">
+      <mat-button-toggle (change)="time = $event.source.value" *ngFor="let duration of timerService.durations" [value]="duration.value">
+        {{ duration.label }}
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <div class="timer__start">
+      <button mat-raised-button (click)="startTimer()">Start</button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #timeInProgressTemplate>
+  <div class="timer__wrapper">
+    <div class="timer">{{ timerService.time | date: 'mm:ss' }}</div>
+    <div class="timer__actions">
+      <button mat-icon-button aria-label="Pause" class="timer__action-button" (click)="stop()">
+        <i class="material-icons">
+          close
+        </i>
+      </button>
+      <button mat-icon-button aria-label="Pause" class="timer__action-button" *ngIf="!timerService.inPause" (click)="pause()">
+        <i class="material-icons">
+          pause
+        </i>
+      </button>
+      <button mat-icon-button aria-label="Pause" class="timer__action-button" *ngIf="timerService.inPause" (click)="continue()">
+        <i class="material-icons">
+          play_arrow
+        </i>
+      </button>
+    </div>
+  </div>
+</ng-template>
