@@ -1,9 +1,9 @@
-import { KEY_CODE } from './../models/keycode.model';
-import { Injectable, HostListener } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Subscription, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { TimerType } from './../models/timer.model';
+import { AudioService } from './audio.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +35,7 @@ export class TimerService {
     { label: '40 mins', value: 2400 }
   ];
 
-  constructor() {}
+  constructor(private audioService: AudioService) {}
 
   startTimer(duration: number, type: TimerType) {
     this.timerType = type;
@@ -44,7 +44,7 @@ export class TimerService {
     this.intermediateTime = duration;
     const interval: Observable<number> = timer(0, 1000);
     this.$interval = interval
-      .pipe(map(val => (val <= this.intermediateTime ? this.intermediateTime - val : this.$interval.unsubscribe())))
+      .pipe(map(val => (val <= this.intermediateTime ? this.intermediateTime - val : this.destroyTimer())))
       .subscribe((time: number) => {
         this.timeLeft = time;
         this.time = new Date(0, 0, 0);
@@ -65,5 +65,11 @@ export class TimerService {
 
   continue() {
     this.startTimer(this.timeLeft, this.timerType);
+  }
+
+  private destroyTimer() {
+    this.$interval.unsubscribe();
+    this.audioService.playNotification();
+    const notification = new Notification('Timer end');
   }
 }
