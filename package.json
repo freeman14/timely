@@ -53,7 +53,7 @@
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "core-js": "^2.5.4",
-    "electron": "^3.0.6",
+    "electron": "^9.1.0",
     "electron-builder": "20.29.0",
     "electron-reload": "1.2.5",
     "firebase": "^5.5.8",
